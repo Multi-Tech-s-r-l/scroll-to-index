@@ -220,7 +220,8 @@ mixin AutoScrollControllerMixin on ScrollController
 
   Future _scrollToIndex(int index,
       {Duration duration: scrollAnimationDuration,
-      AutoScrollPosition? preferPosition}) async {
+      AutoScrollPosition? preferPosition,
+      bool blockBeforeRestart=true}) async {
     assert(duration > Duration.zero);
 
     // In listView init or reload case, widget state of list item may not be ready for query.
