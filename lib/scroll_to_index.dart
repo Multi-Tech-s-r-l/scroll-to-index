@@ -203,11 +203,19 @@ mixin AutoScrollControllerMixin on ScrollController
   @override
   Future scrollToIndex(int index,
       {Duration duration: scrollAnimationDuration,
-      AutoScrollPosition? preferPosition}) async {
-    return co(
-        this,
-        () => _scrollToIndex(index,
-            duration: duration, preferPosition: preferPosition));
+      AutoScrollPosition? preferPosition,
+      bool blockBeforeRestart=true}) async {
+
+    if (blockBeforeRestart){
+      return _scrollToIndex(index,
+              duration: duration, preferPosition: preferPosition);
+    } else {
+      return co(
+          this,
+              () => _scrollToIndex(index,
+              duration: duration, preferPosition: preferPosition));
+    }
+
   }
 
   Future _scrollToIndex(int index,
